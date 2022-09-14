@@ -27,18 +27,14 @@ Future<void> _ensureExecutable(String targetPath, {bool force = false}) async {
   if (await File(targetPath).exists() && !force) return;
 
   final String url = _resolveDownloadUrl();
-  logger.stdout('\nDownload executable for lefthook from $url');
+  logger.stdout('\nDownloading executable from $url...');
   final List<int> fileData = await _downloadFile(url);
-  logger.stdout('Download complete\n');
 
-  logger.stdout('Extracting.');
   final extracted = GZipDecoder().decodeBytes(fileData);
-
   await _saveFile(targetPath, extracted);
   logger.stdout('Executable saved to ${targetPath}');
 
   await _installLefthook(targetPath);
-
   logger.stdout('Done.');
 }
 
