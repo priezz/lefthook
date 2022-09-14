@@ -13,14 +13,11 @@ final Logger logger = Logger.standard();
 
 void main(List<String> args) async {
   final String executablePath =
-      Platform.script.resolve('../.exec/lefthook').toFilePath();
+      Platform.script.resolve('../../../bin/lefthook').toFilePath();
   await _ensureExecutable(executablePath);
   final ProcessResult result = await Process.run(executablePath, args);
-  if (result.exitCode != 0) {
-    logger.stderr(result.stderr);
-  } else {
-    logger.stdout(result.stdout);
-  }
+
+  exit(result.exitCode);
 }
 
 Future<void> _ensureExecutable(String targetPath, {bool force = false}) async {
@@ -28,9 +25,8 @@ Future<void> _ensureExecutable(String targetPath, {bool force = false}) async {
 
   final String url = _resolveDownloadUrl();
   logger.stdout('\nDownloading executable from $url...');
-  final List<int> fileData = await _downloadFile(url);
-
-  final extracted = GZipDecoder().decodeBytes(fileData);
+  final List<int> gzipped = await _downloadFile(url);
+  final List<int> extracted = GZipDecoder().decodeBytes(gzipped);
   await _saveFile(targetPath, extracted);
   logger.stdout('Executable saved to ${targetPath}');
 
