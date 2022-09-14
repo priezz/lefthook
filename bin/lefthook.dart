@@ -19,7 +19,7 @@ void main(List<String> args) async {
   logger.stdout(result.stdout);
   if (result.exitCode != 0) logger.stderr(result.stderr);
 
-  exit(result.exitCode);
+  exitCode = result.exitCode;
 }
 
 Future<void> _ensureExecutable(String targetPath, {bool force = false}) async {
