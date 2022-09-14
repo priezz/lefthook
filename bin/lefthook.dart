@@ -6,7 +6,7 @@ import 'package:archive/archive_io.dart';
 import 'package:cli_util/cli_logging.dart';
 import 'package:system_info/system_info.dart';
 
-const _LEFTHOOK_VERSION = '0.6.3';
+const _LEFTHOOK_VERSION = '1.1.1';
 
 void main(List<String> args) async {
   final logger = new Logger.standard();
@@ -88,7 +88,7 @@ String _resolveDownloadUrl() {
   final os = getOS();
   final architecture = getArchitecture();
 
-  return 'https://github.com/Arkweid/lefthook/releases/download/v${_LEFTHOOK_VERSION}/lefthook_${_LEFTHOOK_VERSION}_${os}_${architecture}.gz';
+  return 'https://github.com/evilmartians/lefthook/releases/download/v${_LEFTHOOK_VERSION}/lefthook_${_LEFTHOOK_VERSION}_${os}_${architecture}.gz';
 }
 
 Future<List<int>> _downloadFile(String url) async {
