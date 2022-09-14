@@ -1,4 +1,5 @@
 # Lefthook
+Forked from [project-cemetery/lefthook]<https://github.com/project-cemetery/lefthook>.
 
 > The fastest polyglot Git hooks manager out there
 
