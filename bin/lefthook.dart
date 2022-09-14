@@ -13,9 +13,11 @@ final Logger logger = Logger.standard();
 
 void main(List<String> args) async {
   final String executablePath =
-      Platform.script.resolve('../.bin/lefthook').toFilePath();
+      Platform.script.resolve('../.exec/lefthook').toFilePath();
   await _ensureExecutable(executablePath);
   final ProcessResult result = await Process.run(executablePath, args);
+  logger.stdout(result.stdout);
+  if (result.exitCode != 0) logger.stderr(result.stderr);
 
   exit(result.exitCode);
 }
